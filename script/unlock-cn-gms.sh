@@ -10,5 +10,5 @@ then
     sed -i '/services_updater/d' $target
     ui_print "成功！"
 else
-    ui_print "未找到$file！"
+    ui_print "未找到文件！"
 fi
