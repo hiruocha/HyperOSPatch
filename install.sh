@@ -2,5 +2,5 @@
 
 for script in "$MODPATH"/script/*.sh
 do
-    sh "$script"
+    . "$script"
 done
