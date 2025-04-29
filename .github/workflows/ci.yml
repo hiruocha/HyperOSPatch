@@ -47,14 +47,11 @@ jobs:
           cp -r ./module/* ./pack
           cp -r ./script ./pack
           cp ./install.sh ./pack/customize.sh
-          cd ./pack
-          zip -r9 "../${{ github.event.repository.name }}_${{ steps.version.outputs.version }}.zip" .
-          cd ..
 
       - name: 上传打包结果
         uses: actions/upload-artifact@v4
 
         with:
-          name: ${{ github.event.repository.name }}_${{ steps.version.outputs.version }}.zip
+          name: ${{ github.event.repository.name }}_${{ steps.version.outputs.version }}
 
-          path: ./${{ github.event.repository.name }}_${{ steps.version.outputs.version }}.zip
+          path: ./pack/*
