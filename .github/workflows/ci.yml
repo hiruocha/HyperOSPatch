@@ -27,10 +27,10 @@ jobs:
 
         run: |
           version=$(grep '^version=' ./module/module.prop | cut -d= -f2 | cut -d' ' -f1)
+          echo "version=$version" >> $GITHUB_OUTPUT
           versionCode=$(grep '^versionCode=' ./module/module.prop | cut -d= -f2)
           versionCode=$((versionCode + 1))
           version="$version (${versionCode})"
-          echo "version=$version" >> $GITHUB_OUTPUT
           sed -i "s/^version=.*/version=$version/" ./module/module.prop
           sed -i "s/^versionCode=.*/versionCode=$versionCode/" ./module/module.prop
 
