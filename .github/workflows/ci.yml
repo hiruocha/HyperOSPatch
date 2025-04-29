@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    name: 打包
+    name: 打包并上传
 
     runs-on: ubuntu-latest
 
@@ -42,14 +42,14 @@ jobs:
           git commit -m "chore: 更新 versionCode"
           git push
 
-      - name: 打包
+      - name: 组装模块
         run: |
           mkdir -p ./pack
           cp -r ./module/* ./pack
           cp -r ./script ./pack
           cp ./install.sh ./pack/customize.sh
 
-      - name: 上传打包结果
+      - name: 上传
         uses: actions/upload-artifact@v4
 
         with:
