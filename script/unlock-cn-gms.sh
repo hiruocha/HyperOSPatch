@@ -1,4 +1,3 @@
-ui_print "正在去除国行系统GMS限制……"
 file=/product/etc/permissions/cn.google.services.xml
 if [ -e "$file" ]
 then
