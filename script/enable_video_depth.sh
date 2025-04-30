@@ -10,5 +10,6 @@ then
     touch  "$MODPATH/system$file"
     ui_print "- 成功！"
 else
-    ui_print "- 非 HyperOS 2，跳过修改！"
+    ui_print "- 非 HyperOS 2！"
+    ui_print "- 跳过修改！"
 fi
