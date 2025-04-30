@@ -69,6 +69,7 @@ jobs:
           MESSAGE: ${{ github.event.head_commit.message }}
 
         run: |
-          CI=$(find . -name '*.zip')
+          CI_FILE=$(find . -name '*.zip')
           ESCAPED=$(python3 -c 'import json, os, urllib.parse; print(urllib.parse.quote(json.dumps(os.environ["MESSAGE"])))')
-          curl "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup?chat_id=@hiruocha_ci&media=%5B%7B%22type%22%3A%22document%22%2C%22media%22%3A%22attach%3A%2F%2Fci%22%2C%22caption%22%3A%24%7BMESSAGE%7D%7D%5D" -F ci="@${CI}"
+          echo "[{\"type\":\"document\", \"media\":\"attach://ci\", \"caption\":$ESCAPED}]" > media.json
+          curl "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup?chat_id=@hiruocha_ci" -F media=@media.json -F ci=@"$CI_FILE"
