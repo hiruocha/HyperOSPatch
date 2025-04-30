@@ -32,6 +32,7 @@ jobs:
           echo "version=$version" >> $GITHUB_OUTPUT
           versionCode=$(grep '^versionCode=' ./module/module.prop | cut -d= -f2)
           versionCode=$((versionCode + 1))
+          echo "versionCode=$versionCode" >> $GITHUB_OUTPUT
           version="$version (${versionCode})"
           sed -i "s/^version=.*/version=$version/" ./module/module.prop
           sed -i "s/^versionCode=.*/versionCode=$versionCode/" ./module/module.prop
@@ -51,13 +52,13 @@ jobs:
           cp -r ./script ./pack
           cp ./install.sh ./pack/customize.sh
           cd ./pack
-          zip -r9 ../${{ github.event.repository.name }}_${{ steps.version.outputs.version }}.zip .
+          zip -r9 ../${{ github.event.repository.name }}_${{ steps.version.outputs.version }}_${{ steps.version.outputs.versionCode }}.zip .
 
       - name: 上传
         uses: actions/upload-artifact@v4
 
         with:
-          name: ${{ github.event.repository.name }}_${{ steps.version.outputs.version }}
+          name: ${{ github.event.repository.name }}_${{ steps.version.outputs.version }}_${{ steps.version.outputs.versionCode }}
 
           path: |
             ./pack/*
