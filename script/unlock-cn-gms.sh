@@ -10,5 +10,6 @@ then
     sed -i '/services_updater/d' "$target"
     ui_print "- 成功！"
 else
-    ui_print "- 未找到文件！"
+    ui_print "- 未找到文件，可能是非国行系统"
+    ui_print "- 跳过修改"
 fi
