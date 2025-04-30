@@ -1,4 +1,4 @@
-# HyperOS 增强模块
+# HyperOSPatch
 增强系统功能，还你旗舰体验！
 
 ## 鸣谢
