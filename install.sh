@@ -1,6 +1,7 @@
 #!/sbin/sh
 
 ui_print "- 开始安装……"
+OLD_MODPATH=/data/adb/modules/hyperos_patch
 for script in "$MODPATH"/script/*.sh
 do
     . "$script"
