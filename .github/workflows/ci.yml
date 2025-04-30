@@ -74,5 +74,5 @@ jobs:
 
         run: |
           CI_FILE=$(find . -name '*.zip')
-          ESCAPED_JSON=$(python3 -c 'import json, os; print(json.dumps([{"type": "document","media": "attach://ci","parse_mode":"MarkdownV2","caption": os.environ["MESSAGE"]}]))')
+          ESCAPED_JSON=$(python3 -c 'import json, os; print(json.dumps([{"type": "document","media": "attach://ci","parse_mode": "MarkdownV2","caption": os.environ["MESSAGE"]}]))')
           curl -v -F "media=$ESCAPED_JSON" -F ci=@"$CI_FILE" "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup?chat_id=@hiruocha_ci"
