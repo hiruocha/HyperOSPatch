@@ -51,7 +51,8 @@ jobs:
         id: log
 
         run: |
-          log=$(awk '/^## v/{ f=1; next } /^## v/{ f=0 } f' CHANGELOG.md | sed '${/^$/d;}')
+          tag=${{ steps.version.outputs.tag }}
+          log=$(awk -v tag="## $tag" '$0 == tag { f=1; next } /^## v/{ f=0 } f' CHANGELOG.md | sed '${/^$/d;}')
           echo "log<<EOF" >> $GITHUB_OUTPUT
           echo "$log" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
