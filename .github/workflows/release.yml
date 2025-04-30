@@ -1,0 +1,79 @@
+name: 发布Release
+
+on:
+  push:
+    branches: [ main ]
+
+    paths:
+      - 'CHANGELOG.md'
+
+jobs:
+  build:
+    name: 打包并发布
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+        with:
+          fetch-depth: 0
+
+      - name: 获取并更新版本号
+        id: version
+
+        run: |
+          tag=$(grep -m1 '^## v' CHANGELOG.md | sed 's/^## //')
+          echo "tag=$tag" >> $GITHUB_OUTPUT
+          versionCode=$(grep '^versionCode=' ./module/module.prop | cut -d= -f2)
+          version="$tag (${versionCode})"
+          sed -i "s/^version=.*/version=$version/" ./module/module.prop
+
+      - name: 推送更改至仓库
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add ./module/module.prop
+          git commit -m "chore: 更新版本号"
+          git push
+
+      - name: 组装模块
+        run: |
+          mkdir -p ./pack
+          cp -r ./module/* ./pack
+          cp -r ./script ./pack
+          cp ./install.sh ./pack/customize.sh
+          cd ./pack
+          zip -r9 ../${{ github.event.repository.name }}_${{ steps.version.outputs.tag }}.zip .
+
+      - name: 提取更新日志
+        id: log
+
+        run: |
+          log=$(awk '/^## v/{ f=1; next } /^## v/{ f=0 } f' CHANGELOG.md | sed '${/^$/d;}')
+          echo "log<<EOF" >> $GITHUB_OUTPUT
+          echo "$log" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: 推送tag
+        run: |
+          git tag ${{ steps.version.outputs.tag }}
+          git push --tags
+
+      - name: 发布
+        uses: softprops/action-gh-release@v2
+
+        with:
+          files: ./${{ github.event.repository.name }}_${{ steps.version.outputs.tag }}.zip
+
+          tag_name: ${{ steps.version.outputs.tag }}
+
+          name: ${{ steps.version.outputs.tag }}
+
+          body: ${{ steps.log.outputs.log }}
+
+          prerelease: ${{ startsWith(steps.version.outputs.tag, 'v0') }}
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
