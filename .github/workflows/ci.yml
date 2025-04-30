@@ -66,9 +66,13 @@ jobs:
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
 
-          MESSAGE: ${{ github.event.head_commit.message }}
+          MESSAGE: |+
+            CI:
+            ```
+            ${{ github.event.head_commit.message }}
+            ```
 
         run: |
           CI_FILE=$(find . -name '*.zip')
-          ESCAPED_JSON=$(python3 -c 'import json, os; print(json.dumps([{"type": "document","media": "attach://ci","caption": os.environ["MESSAGE"]}]))')
+          ESCAPED_JSON=$(python3 -c 'import json, os; print(json.dumps([{"type": "document","media": "attach://ci","parse_mode":"MarkdownV2","caption": os.environ["MESSAGE"]}]))')
           curl -v -F "media=$ESCAPED_JSON" -F ci=@"$CI_FILE" "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup?chat_id=@hiruocha_ci"
