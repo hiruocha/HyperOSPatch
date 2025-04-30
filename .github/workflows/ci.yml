@@ -50,6 +50,8 @@ jobs:
           cp -r ./module/* ./pack
           cp -r ./script ./pack
           cp ./install.sh ./pack/customize.sh
+          cd ./pack
+          zip -r9 ${{ github.event.repository.name }}_${{ steps.version.outputs.version }}.zip
 
       - name: 上传
         uses: actions/upload-artifact@v4
@@ -57,4 +59,17 @@ jobs:
         with:
           name: ${{ github.event.repository.name }}_${{ steps.version.outputs.version }}
 
-          path: ./pack/*
+          path: |
+            ./pack/*
+            !./pack/*.zip
+
+      - name: 推送到Telegram CI 频道
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+
+          MESSAGE: ${{ github.event.head_commit.message }}
+
+          CI: ./pack/*.zip
+
+        run: |
+          curl "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGrop?chat_id=@hiruocha_ci&media=%5B%7B%22type%22%3A%22document%22%2C%22media%22%3A%22attach%3A%2F%2Fci%22%2C%22caption%22%3A%24%7BMESSAGE%7D%7D%5D" -F ci="@${CI}"
