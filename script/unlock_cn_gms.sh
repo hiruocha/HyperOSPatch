@@ -1,4 +1,4 @@
-ui_print "- 正在去除国行系统GMS限制……"
+ui_print "- 正在去除国行系统 GMS 限制……"
 file=/product/etc/permissions/cn.google.services.xml
 if [ -e "$OLD_MODPATH/system$file" ]
 then
