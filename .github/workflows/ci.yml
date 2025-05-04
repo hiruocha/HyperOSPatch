@@ -50,7 +50,6 @@ jobs:
           mkdir -p ./pack
           cp -r ./module/* ./pack
           cp -r ./script ./pack
-          cp ./install.sh ./pack/customize.sh
           cd ./pack
           zip -r9 ../${{ github.event.repository.name }}_${{ steps.version.outputs.version }}_${{ steps.version.outputs.versionCode }}.zip .
 
