@@ -1,5 +1,7 @@
 ui_print "- 正在添加视频景深壁纸……"
+
 file=/product/media/wallpaper/sysui_editor_wallpaper_group/enable_video_depth
+
 if [ -e "$OLD_MODPATH"/system"$file" ]
 then
     ui_print "- 已找到旧模块文件 $(basename "$file")，复制中……"
@@ -16,6 +18,6 @@ then
     touch  "$MODPATH"/system"$file"
     ui_print "- 成功！"
 else
-    ui_print "- 非 HyperOS 2！"
+    ui_print "- 非 HyperOS 2.0！"
     ui_print "- 跳过修改！"
 fi

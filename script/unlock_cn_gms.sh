@@ -1,5 +1,7 @@
 ui_print "- 正在去除国行系统 GMS 限制……"
+
 file=/product/etc/permissions/cn.google.services.xml
+
 if [ -e "$OLD_MODPATH"/system"$file" ]
 then
     ui_print "- 已找到旧模块文件 $(basename "$file")，复制中……"
