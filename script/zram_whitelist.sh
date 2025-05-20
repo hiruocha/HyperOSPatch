@@ -36,6 +36,7 @@ then
             ui_print "- 跳过修改！"
             rm -f "$TEMP_TARGET"
             rm -f "$TARGET"
+        fi
     fi
 else
     ui_print "- 未找到文件！"
