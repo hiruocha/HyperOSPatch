@@ -43,6 +43,7 @@ jobs:
           mkdir -p ./pack
           cp -r ./module/* ./pack
           cp -r ./script ./pack
+          cp -r ./bin ./pack
           cd ./pack
           zip -r9 ../${{ github.event.repository.name }}_${{ steps.version.outputs.tag }}.zip .
 
