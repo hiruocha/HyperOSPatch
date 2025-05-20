@@ -11,7 +11,7 @@ then
 elif [ -e "$file" ]
 then
     ui_print "- 已找到文件 $(basename "$file")，无需修改！"
-elif getprop ro.build.version.incremental | grep -q '^OS2'
+elif echo "$VERSION" | grep -q '^OS2'
 then
     ui_print "- 未找到文件 $(basename "$file")，创建中……"
     mkdir -p "$(dirname "$MODPATH"/system"$file")"
