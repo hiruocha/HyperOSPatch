@@ -40,10 +40,10 @@ jobs:
 
       - name: 组装模块
         run: |
-          mkdir -p ./pack
+          mkdir -p ./pack/bin
+          curl -L -o ./pack/bin/jq "https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-arm64"
           cp -r ./module/* ./pack
           cp -r ./script ./pack
-          cp -r ./bin ./pack
           cd ./pack
           zip -r9 ../${{ github.event.repository.name }}_${{ steps.version.outputs.tag }}.zip .
 
