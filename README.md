@@ -7,5 +7,5 @@
 ## 计划功能
 
 ## 鸣谢
-- [jq](https://jqlang.org/)（[许可](https://github.com/jqlang/jq/blob/master/COPYING)（[副本](docs/licenses/LICENSE_jq)））
+- [jq](https://jqlang.org/)（[许可](https://github.com/jqlang/jq/blob/master/COPYING)（[副本](docs/licenses/jq)））
 - [unlock-cn-gms](https://github.com/fei-ke/unlock-cn-gms)
