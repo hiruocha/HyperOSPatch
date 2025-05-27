@@ -83,9 +83,12 @@ jobs:
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
 
-          MESSAGE: ${{ steps.log.outputs.log }}
+          MESSAGE: |+
+            ```
+            ${{ steps.log.outputs.log }}
+            ```
 
         run: |
           FILE=$(find . -name '*.zip')
-          ESCAPED=$(python3 -c 'import os, json, re; message=re.sub(r"([_*\[\]()~`>#+\-=|{}.!])", r"\\\1", os.environ["MESSAGE"]); print(json.dumps([{"type": "document", "media": "attach://file", "parse_mode": "MarkdownV2", "caption": message}]))')
-          curl -v -F "media=$ESCAPED" -F file=@"$FILE" "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup?chat_id=@hiruocha_group"
+          ESCAPED_JSON=$(python3 -c 'import json, os; print(json.dumps([{"type": "document","media": "attach://file","parse_mode": "MarkdownV2","caption": os.environ["MESSAGE"]}]))'))
+          curl -v -F "media=$ESCAPED_JSON" -F file=@"$FILE" "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup?chat_id=@hiruocha_channel"
