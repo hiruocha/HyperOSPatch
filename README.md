@@ -9,3 +9,4 @@
 ## 鸣谢
 - [jq](https://jqlang.org/)（[许可](https://github.com/jqlang/jq/blob/master/COPYING)（[副本](docs/licenses/jq)））
 - [unlock-cn-gms](https://github.com/fei-ke/unlock-cn-gms)
+- [vitepress](https://vitepress.dev/) （[许可](https://github.com/vuejs/vitepress/blob/main/LICENSE)（[副本](dosc/licenses/vitepress)））
