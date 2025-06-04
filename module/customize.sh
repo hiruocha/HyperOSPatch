@@ -51,8 +51,10 @@ main() {
     local PRODUCT_NAME=$(getprop ro.product.name)
     local VERSION=$(getprop ro.mi.os.version.name)
 
-    ui_print "机型：$PRODUCT_NAME"
-    ui_print "系统版本：$VERSION"
+    ui_print "**********************"
+    ui_print " 机型：$PRODUCT_NAME"
+    ui_print " 系统版本：$VERSION"
+    ui_print "**********************"
 
     chmod_bin
     run_script
