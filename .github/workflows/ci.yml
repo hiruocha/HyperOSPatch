@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
 
     paths-ignore:
       - '.github/**'
@@ -44,7 +44,7 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add ./module/module.prop
           git commit -m "chore: 更新 versionCode"
-          git push origin main
+          git push origin dev
 
       - name: 组装模块
         run: |
