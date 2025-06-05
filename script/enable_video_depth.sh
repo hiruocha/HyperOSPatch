@@ -1,6 +1,6 @@
 ui_print "- 正在添加视频景深壁纸……"
 
-FILE=/product/media/wallpaper/sysui_editor_wallpaper_group/enable_video_depth
+local FILE=/product/media/wallpaper/sysui_editor_wallpaper_group/enable_video_depth
 
 if cp_old_file; then
     :

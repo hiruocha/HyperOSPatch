@@ -7,14 +7,14 @@ ui_print "- 开始安装……"
 # 为二进制文件赋予权限
 chmod_bin() {
     for BIN in "$MODPATH"/bin/*; do
-    chmod +x "$BIN"
+        chmod +x "$BIN"
     done
 }
 
 # 运行子脚本
 run_script() {
-    for script in "$MODPATH"/script/*.sh; do
-    . "$script"
+    for SCRIPT in "$MODPATH"/script/*.sh; do
+        . "$SCRIPT"
     done
 }
 
