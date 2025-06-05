@@ -51,6 +51,7 @@ jobs:
           mkdir -p ./pack/bin
           curl -L -o ./pack/bin/jq "https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-arm64"
           cp -r ./module/* ./pack
+          cp -r ./prop ./pack
           cp -r ./script ./pack
           cd ./pack
           zip -r9 ../${{ github.event.repository.name }}_${{ steps.version.outputs.version }}_${{ steps.version.outputs.versionCode }}.zip .
