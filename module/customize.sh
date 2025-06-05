@@ -30,6 +30,7 @@ clean() {
     ui_print "- 正在清理……"
     rm -rf "$MODPATH"/script
     rm -rf "$MODPATH"/bin
+    rm -rf "$MODPATH"/prop
 }
 
 #####################
