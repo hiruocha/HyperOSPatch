@@ -4,6 +4,13 @@ ui_print "- 开始安装……"
 # 主要安装函数
 ###############
 
+# 导入 prop 属性
+prop() {
+    for PROP in "$MODPATH"/prop/*; do
+        cat "$PROP" >> "$MODPATH"/system.prop
+    done
+}
+
 # 为二进制文件赋予权限
 chmod_bin() {
     for BIN in "$MODPATH"/bin/*; do
