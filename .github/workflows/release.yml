@@ -4,9 +4,6 @@ on:
   push:
     branches: [ main ]
 
-    paths:
-      - 'CHANGELOG.md'
-
 jobs:
   build:
     name: 打包并发布
