@@ -63,6 +63,7 @@ main() {
     ui_print " 系统版本：$VERSION"
     ui_print "**********************"
 
+    prop
     chmod_bin
     run_script
     clean
