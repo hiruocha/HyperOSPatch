@@ -1,0 +1,5 @@
+# 高级材质开关
+persist.sys.background_blur_supported=true
+persist.sys.background_blur_status_default=false
+persist.sys.background_blur_version=2
+persist.sys.advanced_visual_release=3
