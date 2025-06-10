@@ -7,6 +7,8 @@ ui_print "- 开始安装……"
 # 导入 prop 属性
 prop() {
     for PROP in "$MODPATH"/prop/*; do
+        local FEATURE=$(head -n 1 "$PROP" | cut -c3-)
+        ui_print "正在添加 "$FEATURE" 到 system.prop……"
         cat "$PROP" >> "$MODPATH"/system.prop
     done
 }
